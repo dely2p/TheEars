@@ -4,7 +4,7 @@
 
 > 개발 예정 사항
 
-- 애니메이션 사용 가능 여부 확인
+- ~~애니메이션 사용 가능 여부 확인~~
 - 실시간 사용자 얼굴 인식
 - 토끼 귀 모델링
 - 머리 위에 토끼 귀 붙여주기(애니메이션 가능)
@@ -21,4 +21,13 @@
 - animation 가능한 dae file 생성을 위해 <a href="https://free3d.com/">free3D Model</a>과 <a href="https://www.mixamo.com/#/">Mixamo</a> 사용
 - iOS에서 3D Model Animation 가능하겠다는 결론.
 
-<img src="./img/dancingMonster.gif" width="40%">
+	<img src="./img/dancingMonster.gif" width="40%">
+
+## step2
+
+> 토끼 귀 모델링
+
+- 토끼 귀 모양 모델링과 애니메이션 적용
+
+	<img src="./img/theears_anim.gif" width="40%">
+- 텍스쳐 설정 및 애니메이션 curve 수정예정

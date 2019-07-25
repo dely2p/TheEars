@@ -9,19 +9,37 @@
 import UIKit
 import SceneKit
 import ARKit
+import Vision
+import AVKit
 
-class ViewController: UIViewController, ARSCNViewDelegate {
+class ViewController: UIViewController, ARSCNViewDelegate, AVCaptureVideoDataOutputSampleBufferDelegate {
 
     @IBOutlet var sceneView: ARSCNView!
+    
     var animations = [String:CAAnimation]()
     var idle: Bool = true
+    
+    private var scanTimer: Timer?
+    private var scannedFaceViews = [UIView]()
+    
+    private var imageOrientation: CGImagePropertyOrientation {
+        switch UIDevice.current.orientation {
+            case .portrait: return .right
+            case .landscapeRight: return .down
+            case .portraitUpsideDown: return .left
+            case .unknown: fallthrough
+            case .faceUp: fallthrough
+            case .faceDown: fallthrough
+            case .landscapeLeft: return .up
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         sceneView.delegate = self
         sceneView.showsStatistics = true
-        
+
         let scene = SCNScene()
         sceneView.scene = scene
         
@@ -32,21 +50,31 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         super.viewWillAppear(animated)
         let configuration = ARWorldTrackingConfiguration()
         sceneView.session.run(configuration)
+        
+        scanTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(checkFaceDetected), userInfo: nil, repeats: true)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        scanTimer?.invalidate()
         sceneView.session.pause()
     }
+}
+
+// AR animation
+extension ViewController {
     func loadAnimations () {
-        let idleScene = SCNScene(named: "art.scnassets/human/idleFixed.dae")!
+//        let idleScene = SCNScene(named: "art.scnassets/human/idleFixed.dae")!
+        let idleScene = SCNScene(named: "art.scnassets/ears/UpRightEar.DAE")!
+//        UpRightEar.scn
         let node = SCNNode()
         
         for child in idleScene.rootNode.childNodes {
             node.addChildNode(child)
         }
-        node.position = SCNVector3(0, -1, -2)
-        node.scale = SCNVector3(0.2, 0.2, 0.2)
+        node.position = SCNVector3(0, 0, -0.1)
+//        node.scale = SCNVector3(0.02, 0.02, 0.02)
+        node.scale = SCNVector3(0.005, 0.005, 0.005)
         
         sceneView.scene.rootNode.addChildNode(node)
         
@@ -90,5 +118,47 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     func stopAnimation(key: String) {
         sceneView.scene.rootNode.removeAnimation(forKey: key, blendOutDuration: CGFloat(0.5))
+    }
+}
+
+// tracking face
+extension ViewController {
+    @objc func checkFaceDetected() {
+        _ = scannedFaceViews.map { $0.removeFromSuperview() }
+        scannedFaceViews.removeAll()
+        
+        guard let capturedImage = sceneView.session.currentFrame?.capturedImage else { return }
+        
+        let image = CIImage.init(cvPixelBuffer: capturedImage)
+        
+        let detectFaceRequest = VNDetectFaceRectanglesRequest { (request, error) in
+            
+            DispatchQueue.main.async {
+                if let faces = request.results as? [VNFaceObservation] {
+                    _ = faces.map({
+                        print("\($0.boundingBox.origin.x), \($0.boundingBox.origin.y)")
+                    })
+//                    for face in faces {
+//                        let faceView = UIView(frame: self.faceFrame(from: face.boundingBox))
+//
+//                        // draw red box
+////                        faceView.backgroundColor = .red
+////                        self.sceneView.addSubview(faceView)
+////                        self.scannedFaceViews.append(faceView)
+//                    }
+                }
+            }
+        }
+        
+        DispatchQueue.global().async {
+            try? VNImageRequestHandler(ciImage: image, orientation: self.imageOrientation).perform([detectFaceRequest])
+        }
+    }
+    
+    private func faceFrame(from boundingBox: CGRect) -> CGRect {
+        let origin = CGPoint(x: boundingBox.minX * sceneView.bounds.width, y: (1 - boundingBox.maxY) * sceneView.bounds.height)
+        let size = CGSize(width: boundingBox.width * sceneView.bounds.width, height: boundingBox.height * sceneView.bounds.height)
+        
+        return CGRect(origin: origin, size: size)
     }
 }
