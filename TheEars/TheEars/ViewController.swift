@@ -38,7 +38,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVCaptureVideoDataOut
         super.viewDidLoad()
         
         sceneView.delegate = self
-        sceneView.showsStatistics = true
+//        sceneView.showsStatistics = true
 
         let scene = SCNScene()
         sceneView.scene = scene
@@ -51,12 +51,12 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVCaptureVideoDataOut
         let configuration = ARWorldTrackingConfiguration()
         sceneView.session.run(configuration)
         
-        scanTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(checkFaceDetected), userInfo: nil, repeats: true)
+//        scanTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(checkFaceDetected), userInfo: nil, repeats: true)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        scanTimer?.invalidate()
+//        scanTimer?.invalidate()
         sceneView.session.pause()
     }
 }
