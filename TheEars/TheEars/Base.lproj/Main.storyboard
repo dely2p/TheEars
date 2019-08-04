@@ -21,13 +21,39 @@
                             <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BrB-h1-WRS">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </arscnView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uhb-LK-Shh">
+                                <rect key="frame" x="30" y="567" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="4It-zp-bMd"/>
+                                    <constraint firstAttribute="height" constant="50" id="j3G-5P-HsS"/>
+                                </constraints>
+                                <state key="normal" title="왼쪽"/>
+                                <connections>
+                                    <action selector="leftEarButton:" destination="BV1-FR-VrT" eventType="touchUpInside" id="ul6-cT-Z7S"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oZt-oA-a1r">
+                                <rect key="frame" x="295" y="567" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="ILn-Jg-qog"/>
+                                    <constraint firstAttribute="width" constant="50" id="PhS-wb-YaC"/>
+                                </constraints>
+                                <state key="normal" title="오른쪽"/>
+                                <connections>
+                                    <action selector="rightEarButton:" destination="BV1-FR-VrT" eventType="touchUpInside" id="oMq-Ho-L2R"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="fQZ-KI-GVf" firstAttribute="bottom" secondItem="Uhb-LK-Shh" secondAttribute="bottom" constant="50" id="2mv-gu-5o5"/>
+                            <constraint firstItem="fQZ-KI-GVf" firstAttribute="trailing" secondItem="oZt-oA-a1r" secondAttribute="trailing" constant="30" id="Eu3-Jf-R7l"/>
                             <constraint firstItem="BrB-h1-WRS" firstAttribute="leading" secondItem="fQZ-KI-GVf" secondAttribute="leading" id="GsS-dJ-CKf"/>
                             <constraint firstItem="BrB-h1-WRS" firstAttribute="bottom" secondItem="fQZ-KI-GVf" secondAttribute="bottom" id="VpT-BR-CcM"/>
                             <constraint firstItem="BrB-h1-WRS" firstAttribute="trailing" secondItem="fQZ-KI-GVf" secondAttribute="trailing" id="XyZ-9z-H8e"/>
+                            <constraint firstItem="Uhb-LK-Shh" firstAttribute="leading" secondItem="fQZ-KI-GVf" secondAttribute="leading" constant="30" id="lB2-uw-XOb"/>
                             <constraint firstItem="BrB-h1-WRS" firstAttribute="top" secondItem="U0K-SW-4ec" secondAttribute="top" id="rJc-2c-zQA"/>
+                            <constraint firstItem="fQZ-KI-GVf" firstAttribute="bottom" secondItem="oZt-oA-a1r" secondAttribute="bottom" constant="50" id="y1d-iA-Dld"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="fQZ-KI-GVf"/>
                     </view>

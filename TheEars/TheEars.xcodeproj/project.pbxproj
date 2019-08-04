@@ -7,16 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A32EFE1E22F582A700355FCC /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A32EFE1D22F582A700355FCC /* Extension.swift */; };
 		A34932EC22DCD7D90095339D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34932EB22DCD7D90095339D /* AppDelegate.swift */; };
 		A34932EE22DCD7D90095339D /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = A34932ED22DCD7D90095339D /* art.scnassets */; };
 		A34932F022DCD7D90095339D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34932EF22DCD7D90095339D /* ViewController.swift */; };
 		A34932F322DCD7D90095339D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A34932F122DCD7D90095339D /* Main.storyboard */; };
 		A34932F522DCD7DA0095339D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A34932F422DCD7DA0095339D /* Assets.xcassets */; };
 		A34932F822DCD7DA0095339D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A34932F622DCD7DA0095339D /* LaunchScreen.storyboard */; };
-		A3B993FD22E2F01A002A455E /* FaceView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B993FC22E2F01A002A455E /* FaceView2.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A32EFE1D22F582A700355FCC /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		A34932E822DCD7D90095339D /* TheEars.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TheEars.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A34932EB22DCD7D90095339D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A34932ED22DCD7D90095339D /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
@@ -25,7 +26,6 @@
 		A34932F422DCD7DA0095339D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A34932F722DCD7DA0095339D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A34932F922DCD7DA0095339D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A3B993FC22E2F01A002A455E /* FaceView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceView2.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,7 +65,7 @@
 				A34932F422DCD7DA0095339D /* Assets.xcassets */,
 				A34932F622DCD7DA0095339D /* LaunchScreen.storyboard */,
 				A34932F922DCD7DA0095339D /* Info.plist */,
-				A3B993FC22E2F01A002A455E /* FaceView2.swift */,
+				A32EFE1D22F582A700355FCC /* Extension.swift */,
 			);
 			path = TheEars;
 			sourceTree = "<group>";
@@ -144,7 +144,7 @@
 			files = (
 				A34932F022DCD7D90095339D /* ViewController.swift in Sources */,
 				A34932EC22DCD7D90095339D /* AppDelegate.swift in Sources */,
-				A3B993FD22E2F01A002A455E /* FaceView2.swift in Sources */,
+				A32EFE1E22F582A700355FCC /* Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
