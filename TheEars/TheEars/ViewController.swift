@@ -19,6 +19,8 @@ class ViewController: UIViewController {
     var idle: Bool = true
     
     var baseUrl: String = "art.scnassets/human/"
+    var isLeftEarMoving: Bool = false
+    var isRightEarMoving: Bool = false
 
     enum Motion: String {
         case idleFixed, sambaFixed
@@ -77,11 +79,23 @@ class ViewController: UIViewController {
     
     // button
     @IBAction func leftEarButton(_ sender: Any) {
-        playAnimation(key: "dancing", indexOfNode: 1)
+        if isLeftEarMoving {
+            stopAnimation(key: "dancing", indexOfNode: 1)
+            isLeftEarMoving = false
+        }else {
+            playAnimation(key: "dancing", indexOfNode: 1)
+            isLeftEarMoving = true
+        }
     }
     
     @IBAction func rightEarButton(_ sender: Any) {
-        playAnimation(key: "dancing", indexOfNode: 2)
+        if isRightEarMoving {
+            stopAnimation(key: "dancing", indexOfNode: 2)
+            isRightEarMoving = false
+        }else {
+            playAnimation(key: "dancing", indexOfNode: 2)
+            isRightEarMoving = true
+        }
     }
     
 }
