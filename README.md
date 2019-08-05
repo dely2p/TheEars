@@ -37,33 +37,19 @@
 
 > 실시간 사용자 얼굴 인식
 
-- 다음 코드처럼 Timer를 두어 일정한 간격으로 얼굴인식하는 방법을 사용하려 했으나 앱 실행시 실행시간에 비례하여 화면출력 딜레이가 커지는 증상 발견
+- Timer를 두어 일정한 간격으로 얼굴인식하는 방법을 사용하려 했으나 앱 실행시 실행시간에 비례하여 화면출력 딜레이가 커지는 증상 발견
+- AR Session Configuration 중 ARFaceTrackingConfiguration은 iPhone X에서만 가능(현재 가능한 test 기기: iPhone 6s)
+- iPhone X 테스트 기기를 구하던지, ARFaceTrackingConfiguration이 아닌 방법으로 face detection 하는 방법을 찾아봐야겠음
 
-```swift
-scanTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(checkFaceDetected), userInfo: nil, repeats: true)
-```
+## step4
 
-```
-@objc func checkFaceDetected() {
-        _ = scannedFaceViews.map { $0.removeFromSuperview() }
-        scannedFaceViews.removeAll()
-        guard let capturedImage = sceneView.session.currentFrame?.capturedImage else { return }
-        let image = CIImage.init(cvPixelBuffer: capturedImage)
-        let detectFaceRequest = VNDetectFaceRectanglesRequest { (request, error) in
-            DispatchQueue.main.async {
-                if let faces = request.results as? [VNFaceObservation] {
-                    _ = faces.map({
-                        print("\($0.boundingBox.origin.x), \($0.boundingBox.origin.y)")
-                    })
-                    for face in faces {
-                        let faceView = UIView(frame: self.faceFrame(from: face.boundingBox))
+> 각 버튼 누르면 각 토끼 귀 움직이기
 
-//                        // draw red box
-//                        faceView.backgroundColor = .red
-//                        self.sceneView.addSubview(faceView)
-//                        self.scannedFaceViews.append(faceView)
-                    }
-                }
-            }
-        }
-```
+- 기존에는 토끼 양 귀를 하나로 모델링 할 생각이었으나, 각 버튼을 누를 때마다 각각 위로나 아래로 움직이는 애니메이션을 적용 시켜야 하기 때문에 양쪽 귀를 따로 모델링 해야한다는 것을 깨달았다.
+- 오른쪽 귀 애니메이션 동작과 왼쪽 귀 애니메이션은 서로 영향을 받아서는 안된다는 결론 -> SCNNode로 해결
+	- SCNNode는 Scene의 계층 구조를 구성할 수 있다.
+	- SCNNode는 add 되는 차례대로 rootNode의 [SCNNode]형태인 childNodes에 쌓이게 된다.
+	- 이 프로젝트에서는 childNodes의 index 1과 2에 leftEarNode와 rightEarNode가 각각 들어가도록 구현했다.
+- 토끼 귀 모델링 이전이기에 애니메이션이 가능한 모델링을 사용하여 각 버튼 클릭 시 각각 상호무관한 애니메이션이 잘 작동되는지 확인했다.
+	
+	<img src="./img/moving_node.gif" width="40%">
